@@ -28,3 +28,5 @@ pub trait TableExt {
         unlock_at: DateTime<Utc>,
         public_id: &str
     ) -> Result<Capsule, Error>;
+
+    async fn get_all_capsules(&self) -> Result<Vec<Capsule>, Error>;
