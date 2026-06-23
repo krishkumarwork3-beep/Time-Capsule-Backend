@@ -59,3 +59,5 @@ impl TableExt for DBClient {
         )
         .fetch_one(&self.pool)
         .await?;
+        Ok(row)
+    }
