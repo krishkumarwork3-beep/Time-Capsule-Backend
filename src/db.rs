@@ -39,3 +39,12 @@ pub trait TableExt {
 
 #[async_trait]
 impl TableExt for DBClient {
+    async fn create_capsule (
+        &self,
+        name: &str,
+        email: &str,
+        title: &str,
+        message: &str,
+        unlock_at: DateTime<Utc>,
+        public_id: &str
+    ) -> Result<Capsule, Error> {
