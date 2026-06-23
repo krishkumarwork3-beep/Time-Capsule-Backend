@@ -30,3 +30,9 @@ pub struct CreateCapsuleRequest {
     pub message: String,
     pub unlock_at: DateTime<Utc>,
 }
+
+#[derive(Debug, Serialize)]
+pub struct CreateCapsuleResponse {
+    pub public_id: String,
+    pub unlock_at: DateTime<Utc>,
+}
