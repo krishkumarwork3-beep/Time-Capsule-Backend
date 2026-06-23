@@ -28,3 +28,5 @@ pub struct CreateCapsuleRequest {
     pub title: String,
     #[validate(length(min = 1, message = "Message is required"))]
     pub message: String,
+    pub unlock_at: DateTime<Utc>,
+}
