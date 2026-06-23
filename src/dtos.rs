@@ -51,3 +51,15 @@ pub struct CapsuleDto {
 
 impl From<Capsule> for CapsuleDto {
     fn from(c: Capsule) -> Self {
+                CapsuleDto {
+            id: c.id,
+            public_id: c.public_id,
+            name: c.name,
+            title: c.title,
+            message: c.message,
+            unlock_at: c.unlock_at.unwrap(),
+            created_at: c.created_at.unwrap(),
+            is_unlocked: c.is_unlocked.unwrap()
+        }
+    }
+}
