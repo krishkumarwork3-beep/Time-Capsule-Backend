@@ -24,3 +24,9 @@ impl fmt::Display for ErrorResponse {
         )
     }
 }
+
+#[derive(Debug, Clone)]
+pub struct HttpError {
+    pub message: String,
+    pub status: StatusCode,
+}
