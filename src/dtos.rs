@@ -36,3 +36,15 @@ pub struct CreateCapsuleResponse {
     pub public_id: String,
     pub unlock_at: DateTime<Utc>,
 }
+
+#[derive(Debug, Serialize)]
+pub struct CapsuleDto {
+    pub id: Uuid,
+    pub public_id: String,
+    pub name: String,
+    pub title: String,
+    pub message: String,
+    pub unlock_at: DateTime<Utc>,
+    pub created_at: DateTime<Utc>,
+    pub is_unlocked: bool,
+}
