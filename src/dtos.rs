@@ -48,3 +48,6 @@ pub struct CapsuleDto {
     pub created_at: DateTime<Utc>,
     pub is_unlocked: bool,
 }
+
+impl From<Capsule> for CapsuleDto {
+    fn from(c: Capsule) -> Self {
