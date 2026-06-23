@@ -30,3 +30,9 @@ pub trait TableExt {
     ) -> Result<Capsule, Error>;
 
     async fn get_all_capsules(&self) -> Result<Vec<Capsule>, Error>;
+
+        async fn get_capsule_by_public_id(
+        &self,
+        public_id: &str
+    ) -> Result<Option<Capsule>, Error>;
+}
