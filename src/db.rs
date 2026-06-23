@@ -48,3 +48,14 @@ impl TableExt for DBClient {
         unlock_at: DateTime<Utc>,
         public_id: &str
     ) -> Result<Capsule, Error> {
+        let row = query_as!(
+            Capsule,
+            r#"
+            INSERT INTO capsules (public_id, name, email, title, message, unlock_at)
+            VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING id, public_id, name, email, title, message, unlock_at, created_at, is_unlocked, email_sent
+            "#,
+            public_id, name, email, title, message, unlock_at
+        )
+        .fetch_one(&self.pool)
+        .await?;
