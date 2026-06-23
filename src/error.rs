@@ -87,3 +87,17 @@ impl HttpError {
         (self.status, json_response).into_response()
     }
 }
+
+impl fmt::Display for HttpError {
+    fn fmt(
+        &self,
+        f: &mut fmt::Formatter<'_>
+    ) -> fmt::Result {
+        write!(
+            f,
+            "HttpError: message: {}, status: {}",
+            self.message,
+            self.status
+        )
+    }
+}
