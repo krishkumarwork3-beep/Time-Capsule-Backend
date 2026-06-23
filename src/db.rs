@@ -36,3 +36,6 @@ pub trait TableExt {
         public_id: &str
     ) -> Result<Option<Capsule>, Error>;
 }
+
+#[async_trait]
+impl TableExt for DBClient {
