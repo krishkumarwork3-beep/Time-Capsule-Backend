@@ -50,3 +50,12 @@ impl HttpError {
             status: StatusCode::INTERNAL_SERVER_ERROR,
         }
     }
+
+    pub fn bad_request(
+        message: impl Into<String>
+    ) -> Self {
+        HttpError {
+            message: message.into(),
+            status: StatusCode::BAD_REQUEST,
+        }
+    }
