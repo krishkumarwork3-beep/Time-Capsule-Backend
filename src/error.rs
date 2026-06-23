@@ -59,3 +59,12 @@ impl HttpError {
             status: StatusCode::BAD_REQUEST,
         }
     }
+
+    pub fn unique_constraint_violation(
+        message: impl Into<String>
+    ) -> Self {
+        HttpError {
+            message: message.into(),
+            status: StatusCode::CONFLICT,
+        }
+    }
