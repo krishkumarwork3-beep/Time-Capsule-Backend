@@ -61,3 +61,17 @@ impl TableExt for DBClient {
         .await?;
         Ok(row)
     }
+
+    async fn get_all_capsules(&self) -> Result<Vec<Capsule>, Error> {
+        let capsules = query_as!(
+            Capsule,
+            r#"
+            SELECT * FROM capsules
+            ORDER BY created_at DESC
+            "#
+        )
+        .fetch_all(&self.pool)
+        .await?;
+
+        Ok(capsules)
+    }
