@@ -17,3 +17,6 @@ pub struct Capsule {
     pub is_unlocked: Option<bool>,
     pub email_sent: Option<bool>,
 }
+
+#[derive(Debug, Deserialize, Validate)]
+pub struct CreateCapsuleRequest {
