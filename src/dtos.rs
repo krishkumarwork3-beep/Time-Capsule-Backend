@@ -20,3 +20,5 @@ pub struct Capsule {
 
 #[derive(Debug, Deserialize, Validate)]
 pub struct CreateCapsuleRequest {
+    #[validate(length(min = 1, message = "Name is required"))]
+    pub name: String,
