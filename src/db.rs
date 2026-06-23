@@ -80,3 +80,18 @@ impl TableExt for DBClient {
         &self,
         public_id: &str
     ) -> Result<Option<Capsule>, Error> {
+        let result = query_as!(
+            Capsule,
+            r#"
+            SELECT *
+            FROM capsules
+            WHERE public_id = $1
+            "#,
+            public_id
+        )
+        .fetch_optional(&self.pool)
+        .await?;
+
+        Ok(result)
+    }
+}
