@@ -22,3 +22,5 @@ pub struct Capsule {
 pub struct CreateCapsuleRequest {
     #[validate(length(min = 1, message = "Name is required"))]
     pub name: String,
+    #[validate(email(message = "Invalid Email format"))]
+    pub email: String,
