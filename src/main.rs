@@ -89,3 +89,31 @@ async fn main() {
         env: config.clone(),
         db_client,
     };
+    let app = Router::new()
+        .route("/create", post(create_capsule))
+        .route("/capsules", get(get_all_capsules))
+        .route(
+            "/capsule/:public_id",
+            get(get_capsule_by_public_id)
+        )
+        .layer(Extension(Arc::new(app_state)))
+        .layer(cors);
+
+    println!(
+        "{}",
+        format!(
+            "🚀 Server is running on http://localhost:{}",
+            &config.port
+        ),
+    );
+
+    let listener = tokio::net::TcpListener::bind(
+        format!("0.0.0.0:{}", &config.port)
+    )
+    .await
+    .unwrap();
+
+    axum::serve(listener, app)
+        .await
+        .unwrap();
+}
