@@ -68,3 +68,27 @@ pub async fn get_all_capsules(
 
     Ok(Json(capsule_dto))
 }
+
+pub async fn get_capsule_by_public_id(
+    Path(public_id): Path<String>,
+    Extension(app_state): Extension<Arc<AppState>>,
+) -> Result<impl IntoResponse, HttpError> {
+
+    let capsule = app_state.db_client
+        .get_capsule_by_public_id(&public_id)
+        .await
+        .map_err(|e| HttpError::server_error(e.to_string()))?;
+
+    match capsule {
+        Some(capsule) => {
+            let capsule_dto = CapsuleDto::from(capsule);
+
+            Ok(Json(capsule_dto))
+        }
+        None => Err(
+            HttpError::bad_request(
+                "Capsule not found".to_string()
+            )
+        )
+    }
+}
