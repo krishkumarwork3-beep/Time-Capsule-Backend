@@ -50,3 +50,21 @@ pub async fn create_capsule(
 
     Ok(Json(response))
 }
+
+pub async fn get_all_capsules(
+    Extension(app_state): Extension<Arc<AppState>>,
+) -> Result<impl IntoResponse, HttpError> {
+
+    let capsules = app_state.db_client
+        .get_all_capsules()
+        .await
+        .map_err(|e| HttpError::server_error(e.to_string()))?;
+
+    let capsule_dto: Vec<CapsuleDto> =
+        capsules
+            .into_iter()
+            .map(Into::into)
+            .collect();
+
+    Ok(Json(capsule_dto))
+}
